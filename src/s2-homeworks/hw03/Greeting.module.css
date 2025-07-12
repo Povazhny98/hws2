@@ -2,12 +2,20 @@
 }
 
 .inputAndButtonContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    padding: 14px;
+
+
 }
 
 .error {
 }
 
-.input {
+.inputClass {
+
+
 }
 
 .input:focus {
@@ -17,6 +25,12 @@
 }
 
 .button {
+
+    margin: 0 0 0 10px;
+
+
+;
+
 }
 
 .button:focus {

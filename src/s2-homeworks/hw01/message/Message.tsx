@@ -20,7 +20,7 @@ const Message = (props: MessagePropsType) => {
                    src={props.message.user.avatar}
                     alt={`avatar of ${props.message.user.name}`}
                 />
-                <div className={s.text}>
+                <div className={s.messageText}>
                     <div id={'hw1-name-' + props.message.id} className={s.name}>
                         {/*создаёт студент*/}
                         {props.message.user.name}
