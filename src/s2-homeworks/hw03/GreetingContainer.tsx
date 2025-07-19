@@ -1,7 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react'
 import Greeting from './Greeting'
 import {UserType} from './HW3'
-import {type} from "node:os";
 
 type GreetingContainerPropsType = {
     users: UserType[] // need to fix any
@@ -22,7 +21,7 @@ export const pureAddUser = (name: string,
 }
 
 export const pureOnBlur = (name: string, setError: (error: string) => void) => {
-    if (name !== name.trim()) {
+    if (!name.trim()) {
         setError('Ошибка!Введите имя!')// если имя пустое - показать ошибку
     }
 }
