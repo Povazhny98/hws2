@@ -1,7 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react'
 import Greeting from './Greeting'
 import {UserType} from './HW3'
-import {type} from "node:os";
 
 type GreetingContainerPropsType = {
     users: UserType[] // need to fix any
@@ -22,7 +21,7 @@ export const pureAddUser = (name: string,
 }
 
 export const pureOnBlur = (name: string, setError: (error: string) => void) => {
-    if (name !== name.trim()) {
+    if (!name.trim()) {
         setError('Ошибка!Введите имя!')// если имя пустое - показать ошибку
     }
 }
@@ -46,12 +45,15 @@ export const pureOnBlur = (name: string, setError: (error: string) => void) => {
         const [name, setName] = useState<string>('') // need to fix any
         const [error, setError] = useState<string>('') // need to fix any
 
-        const setNameCallback = (e: ChangeEvent<HTMLInputElement>) => { // need to fix any
-            setName(e.currentTarget.value) // need to fix
+        const setNameCallback = (e: ChangeEvent<HTMLInputElement>) => {
+            const value = e.currentTarget.value;
+            setName(value);
 
-            error && setError('')
+            // Всегда очищаем ошибку при любом вводе (если поле не пустое)
+            if (value.trim()) {
+                setError('');
+            }
         }
-
         const addUser = () => {
             pureAddUser(name, setError, setName, addUserCallback)
         }
