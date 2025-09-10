@@ -1,25 +1,192 @@
 .sidebar {
+    position: fixed;
+    top: 0;
+    left: -320px;
+    width: 300px;
+    height: 100vh;
+    background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    overflow-y: auto;
 }
 
 .sidebar.open {
+    left: 0;
+    box-shadow: 4px 0 25px rgba(0, 0, 0, 0.3);
+    transform: translateX(0);
+}
+
+/* Эффект "пружины" при открытии */
+.sidebar.open {
+    animation: sidebarBounce 0.6s ease;
+}
+
+@keyframes sidebarBounce {
+    0% {
+        left: -320px;
+    }
+    60% {
+        left: 20px;
+    }
+    80% {
+        left: -10px;
+    }
+    100% {
+        left: 0;
+    }
 }
 
 .background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(3px);
+}
+
+.background.open {
+    opacity: 1;
+    visibility: visible;
 }
 
 .nav {
+    padding: 70px 25px 30px 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .nav a {
+    color: #ecf0f1;
+    text-decoration: none;
+    padding: 16px 24px;
+    border-radius: 12px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: #3498db;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .nav a:hover {
+    background: rgba(52, 152, 219, 0.15);
+    transform: translateX(8px);
+    color: #3498db;
+}
+
+.nav a:hover::before {
+    opacity: 1;
 }
 
 .nav a.active {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white !important;
+    transform: translateX(0) !important;
+    box-shadow: 0 5px 20px rgba(52, 152, 219, 0.4);
 }
+
+.nav a.active::before {
+    opacity: 1 !important;
+    background: white !important;
+}
+
 .close {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 1001;
+}
+
+.close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
 }
 
 .close img {
+    width: 18px;
+    height: 18px;
+    filter: invert(1);
+    transition: transform 0.3s ease;
+}
+
+/* Анимация появления элементов при открытии */
+.sidebar.open .nav a {
+    animation: slideInFromLeft 0.5s ease forwards;
+}
+
+.sidebar.open .nav a:nth-child(1) { animation-delay: 0.1s; }
+.sidebar.open .nav a:nth-child(2) { animation-delay: 0.15s; }
+.sidebar.open .nav a:nth-child(3) { animation-delay: 0.2s; }
+.sidebar.open .nav a:nth-child(4) { animation-delay: 0.25s; }
+.sidebar.open .nav a:nth-child(5) { animation-delay: 0.3s; }
+
+@keyframes slideInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 480px) {
+    .sidebar {
+        width: 280px;
+        left: -300px;
+    }
+
+    .sidebar.open {
+        left: 0;
+    }
+
+    .nav {
+        padding: 60px 20px 25px 20px;
+    }
+
+    .nav a {
+        padding: 14px 20px;
+        font-size: 15px;
+    }
+
+    .close {
+        top: 20px;
+        right: 20px;
+        width: 35px;
+        height: 35px;
+    }
 }
