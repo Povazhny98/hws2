@@ -1,7 +1,7 @@
-import React, {ButtonHTMLAttributes, DetailedHTMLProps} from 'react'
+import React, {ButtonHTMLAttributes, DetailedHTMLProps, useState} from 'react'
 import s from './SuperButton.module.css'
 import {Simulate} from "react-dom/test-utils";
-import error = Simulate.error;
+import {createRoot} from "react-dom/client"
 
 // тип пропсов обычной кнопки, children в котором храниться название кнопки там уже описан
 type DefaultButtonPropsType = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>,
@@ -37,8 +37,7 @@ const SuperButton: React.FC<SuperButtonPropsType> = (
 }
 
 
-import { useState } from "react"
-import { createRoot } from "react-dom/client"
+
 export const colors = ["red", "yellow", "green", "blue", "violet", "chartreuse"]
 const styles = {
     width: "100px",
